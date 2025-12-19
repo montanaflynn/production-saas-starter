@@ -10,13 +10,22 @@ MIGRATION_NAME ?= init_schema
 MIGRATION_DIR ?= ./src/pkg/db/postgres/sqlc/migrations
 SQLC_DIR ?= src/pkg/db/postgres/sqlc
 
+# Helper function to run docker compose (tries docker compose first, falls back to docker-compose)
+define docker-compose-cmd
+	@if docker compose version >/dev/null 2>&1; then \
+		docker compose $(1); \
+	else \
+		docker-compose $(1); \
+	fi
+endef
+
 # Start the necessary docker containers
 run-deps:
-	docker compose -f $(COMPOSE_FILE) up --build -d
+	$(call docker-compose-cmd,-f $(COMPOSE_FILE) up --build -d)
 
 # Stop and remove docker containers
 stop-deps:
-	docker compose -f $(COMPOSE_FILE) down -v
+	$(call docker-compose-cmd,-f $(COMPOSE_FILE) down -v)
 
 # Create a new database migration file
 create-migration:
@@ -26,14 +35,14 @@ create-migration:
 # Apply all up migrations
 # Apply all up migrations
 migrateup:
-	@docker compose -f $(COMPOSE_FILE) run --rm cli migrate -path $(MIGRATION_DIR) -database "postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres:$(POSTGRES_PORT)/$(POSTGRES_DB)?sslmode=disable" -verbose up
+	$(call docker-compose-cmd,-f $(COMPOSE_FILE) run --rm cli migrate -path $(MIGRATION_DIR) -database "postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres:$(POSTGRES_PORT)/$(POSTGRES_DB)?sslmode=disable" -verbose up)
 
 # Apply all down migrations
 migratedown:
-	@docker compose -f $(COMPOSE_FILE) run --rm cli migrate -path $(MIGRATION_DIR) -database "postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres:$(POSTGRES_PORT)/$(POSTGRES_DB)?sslmode=disable" -verbose down
+	$(call docker-compose-cmd,-f $(COMPOSE_FILE) run --rm cli migrate -path $(MIGRATION_DIR) -database "postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres:$(POSTGRES_PORT)/$(POSTGRES_DB)?sslmode=disable" -verbose down)
 
 sqlc:
-	@docker compose -f $(COMPOSE_FILE) run --rm -w /workspace/$(SQLC_DIR) cli sqlc generate
+	$(call docker-compose-cmd,-f $(COMPOSE_FILE) run --rm -w /workspace/$(SQLC_DIR) cli sqlc generate)
 
 # Create a new module
 create-module:
@@ -55,11 +64,11 @@ deps:
 # swagger
 # swagger
 swagger:
-	@docker compose -f $(COMPOSE_FILE) run --rm cli swag init -g main/main.go -d src --parseDependency --parseInternal --exclude src/api/example_resource -o src/docs/gen
+	$(call docker-compose-cmd,-f $(COMPOSE_FILE) run --rm cli swag init -g main/main.go -d src --parseDependency --parseInternal --exclude src/api/example_resource -o src/docs/gen)
 
 # Run the server with Air (Live Reload)
 dev:
-	@docker compose -f $(COMPOSE_FILE) run --rm -T --service-ports cli air 
+	$(call docker-compose-cmd,-f $(COMPOSE_FILE) run --rm -T --service-ports cli air) 
 
 reload-profile:
 	@source ~/.bashrc
