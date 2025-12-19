@@ -9,7 +9,7 @@ NC='\033[0m' # No Color
 
 # Store the root directory
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BACKEND_DIR="$ROOT_DIR/go-b2b-starter"
+BACKEND_DIR="$ROOT_DIR/backend"
 
 # Cleanup function
 cleanup() {
@@ -65,7 +65,7 @@ else
 fi
 
 # Frontend Config
-FRONTEND_DIR="$ROOT_DIR/next_b2b_starter"
+FRONTEND_DIR="$ROOT_DIR/frontend"
 if [ ! -f "$FRONTEND_DIR/.env.local" ]; then
     echo -e "${YELLOW}  Creating frontend config from example...${NC}"
     cp "$FRONTEND_DIR/.env.example" "$FRONTEND_DIR/.env.local"
@@ -115,8 +115,8 @@ echo ""
 echo -e "You can now run the services in separate terminal tabs:"
 echo ""
 echo -e "${BLUE}1. Run Backend (with Air hot-reload):${NC}"
-echo -e "   cd go-b2b-starter && make dev"
+echo -e "   cd backend && make dev"
 echo ""
 echo -e "${BLUE}2. Run Frontend:${NC}"
-echo -e "   cd next_b2b_starter && pnpm dev"
+echo -e "   cd frontend && pnpm dev"
 echo ""

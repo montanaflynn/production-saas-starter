@@ -6,18 +6,18 @@ This document covers the manual steps to verify your environment if `setup.sh` i
 
 The kit comes with example files. You need to copy them to the "live" filenames.
 
-### Backend (`go-b2b-starter`)
+### Backend (`backend`)
 ```bash
-cp go-b2b-starter/example.env go-b2b-starter/app.env
+cp backend/example.env backend/app.env
 ```
 Open `app.env` and fill in the keys:
 *   `DB_SOURCE`: Your Postgres connection string.
 *   `STYTCH_PROJECT_ID`: From Stytch Dashboard.
 *   `POLAR_ACCESS_TOKEN`: From Polar.sh.
 
-### Frontend (`next_b2b_starter`)
+### Frontend (`frontend`)
 ```bash
-cp next_b2b_starter/.env.example next_b2b_starter/.env.local
+cp frontend/.env.example frontend/.env.local
 ```
 Update `.env.local` with your public API keys.
 
@@ -26,7 +26,7 @@ Update `.env.local` with your public API keys.
 If you prefer running dependencies manually (without `setup.sh`):
 
 ```bash
-cd go-b2b-starter
+cd backend
 docker compose -f deps/docker-compose.yml up -d postgres redis
 ```
 
@@ -35,7 +35,7 @@ docker compose -f deps/docker-compose.yml up -d postgres redis
 Once Docker is running, you must apply the schema:
 
 ```bash
-cd go-b2b-starter
+cd backend
 make migrateup
 ```
 

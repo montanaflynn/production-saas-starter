@@ -95,8 +95,8 @@ chmod +x setup.sh && ./setup.sh
 
 **Manual Start:**
 
-1.  **Backend:** `cd go-b2b-starter && make dev`
-2.  **Frontend:** `cd next_b2b_starter && pnpm dev`
+1.  **Backend:** `cd backend && make dev`
+2.  **Frontend:** `cd frontend && pnpm dev`
 3.  **Visit:** [http://localhost:3000](http://localhost:3000)
 
 > [!IMPORTANT]

@@ -49,53 +49,53 @@ temp/
 # PROJECT-SPECIFIC IGNORES
 # ==============================================================================
 
-# --- Go Backend (go-b2b-starter/) ---
+# --- Go Backend (backend/) ---
 # Go Environment Files
-go-b2b-starter/.env
-go-b2b-starter/.env.*
-go-b2b-starter/app.env
+backend/.env
+backend/.env.*
+backend/app.env
 
 # Binaries and Build Artifacts
-go-b2b-starter/bin/
-go-b2b-starter/dist/
-go-b2b-starter/*.exe
-go-b2b-starter/*.exe~
-go-b2b-starter/*.dll
-go-b2b-starter/*.so
-go-b2b-starter/*.dylib
-go-b2b-starter/*.test
-go-b2b-starter/main
-go-b2b-starter/src/main/main
-go-b2b-starter/src/bin/main
+backend/bin/
+backend/dist/
+backend/*.exe
+backend/*.exe~
+backend/*.dll
+backend/*.so
+backend/*.dylib
+backend/*.test
+backend/main
+backend/src/main/main
+backend/src/bin/main
 
 # Go Temporary Files
-go-b2b-starter/tmp/
-go-b2b-starter/temp/
+backend/tmp/
+backend/temp/
 
 # Go Test Coverage
-go-b2b-starter/coverage.out
-go-b2b-starter/coverage.html
-go-b2b-starter/coverage.txt
-go-b2b-starter/coverage/
+backend/coverage.out
+backend/coverage.html
+backend/coverage.txt
+backend/coverage/
 
 # Go Vendor
-go-b2b-starter/vendor/
+backend/vendor/
 
-# --- Next.js Frontend (next_b2b_starter/) ---
+# --- Next.js Frontend (frontend/) ---
 # Next.js Environment Files
-next_b2b_starter/.env.local
-next_b2b_starter/.env.production
-next_b2b_starter/.env.development
-next_b2b_starter/.env
+frontend/.env.local
+frontend/.env.production
+frontend/.env.development
+frontend/.env
 
 # Dependencies
-next_b2b_starter/node_modules/
+frontend/node_modules/
 
 # Next.js Build Output
-next_b2b_starter/.next/
-next_b2b_starter/out/
-next_b2b_starter/build/
+frontend/.next/
+frontend/out/
+frontend/build/
 
 # TypeScript Build Info
-next_b2b_starter/*.tsbuildinfo
-next_b2b_starter/.turbo/
+frontend/*.tsbuildinfo
+frontend/.turbo/
